@@ -1,0 +1,9 @@
+120px X 275px
+
+bottles 20px X 50px
+
+single: (340px,160px)
+
+dual: (360px, 365px) and (320px, 365px) @ 180deg
+
+https://silhouettegarden.com/download/beer-bottle-silhouette/
