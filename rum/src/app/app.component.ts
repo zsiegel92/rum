@@ -10,7 +10,4 @@ import { CardComponent } from './card/card.component'
 export class AppComponent {
   title = 'rum';
 
-  // constructor(private domSanitizer: DomSanitizer,private cardComponent: CardComponent) {
-  // 	// this.cardComponent = this.domSanitizer.bypassSecurityTrustHtml('svg');
-  // }
 }

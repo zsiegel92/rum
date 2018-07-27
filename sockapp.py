@@ -1,5 +1,7 @@
 from flask import Flask, render_template
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO, emit, join_room, leave_room, \
+	close_room, rooms, disconnect
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
@@ -7,23 +9,21 @@ socketio = SocketIO(app)
 
 @app.route('/')
 def index():
-	return render_template('index.html')
+	return "Hello from flask app!"
 
-@socketio.on('my event', namespace='/test')
+@socketio.on('add-message')
 def test_message(message):
-	emit('my response', {'data': message['data']})
+	print(message)
+	emit('custom_message', {'message':f"Bounced back from server: \"{message}\"",'room':0})
 
-@socketio.on('my broadcast event', namespace='/test')
-def test_message(message):
-	emit('my response', {'data': message['data']}, broadcast=True)
-
-@socketio.on('connect', namespace='/test')
+@socketio.on('connect')
 def test_connect():
-	emit('my response', {'data': 'Connected'})
+	join_room(0)
+	emit('custom_message', {'message':'Congratulations! You are connected','room':0})
 
-@socketio.on('disconnect', namespace='/test')
+@socketio.on('disconnect')
 def test_disconnect():
 	print('Client disconnected')
 
 if __name__ == '__main__':
-	socketio.run(app)
+	socketio.run(app,debug=True)

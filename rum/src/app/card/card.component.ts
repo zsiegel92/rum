@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, ApplicationRef, Pipe,PipeTransform  } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Component, OnInit, Input  } from '@angular/core';
+
 
 
 @Component({
@@ -13,12 +13,10 @@ export class CardComponent implements OnInit {
 	@Input() double2: string;
 
 
-  constructor(private ref: ApplicationRef) {
+  constructor() {
   	this.single="blue";
   	this.double1="red";
   	this.double2="green";
-  	// this.ref.tick();
-  	// this.svgTemplate = this.domSanitizer.bypassSecurityTrustHtml(svg);
   }
 
   ngOnInit() {

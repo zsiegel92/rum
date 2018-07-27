@@ -1,0 +1,17 @@
+<div *ngIf="inRoom">
+	In a room!
+	<app-card #card1 single="blue" double1="red" double2="orange"></app-card>
+
+	<app-card #card2 single="red" double1="blue" double2="green"></app-card>
+
+</div>
+
+<div *ngIf="!inRoom">
+	Not in a room!
+</div>
+
+<h2>Messages</h2>
+<div *ngFor="let message of messages">
+	{{message.text}}
+</div>
+<input type="text" [(ngModel)]="message" > <button (click)="sendMessage()"> Send </button>
