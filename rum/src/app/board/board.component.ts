@@ -8,11 +8,14 @@ import { SocketService } from '../socket.service';
 })
 export class BoardComponent implements OnInit {
 	inRoom: boolean;
-	messages = [];
+	messages;
 	connection;
 	message;
+	url2 = window.location.href.split(":",2).join(":") + ":5000";
+	url3 = location.protocol + '//' + document.domain + ':' + 5000;
   constructor(private socketService: SocketService) {
   	this.inRoom = false;
+
   }
 
   ngOnInit() {
@@ -21,11 +24,16 @@ export class BoardComponent implements OnInit {
     // });
     this.socketService.hello();
     this.socketService.sendMessage("Connecting to rum now");
+    this.messages=this.socketService.messages;
   }
 
-
-  sendMessage(){
-    this.socketService.sendMessage(this.message);
+  sendMany(){
+  	for (let i = 0; i < 100; i++) {
+	  	this.sendMessage("Testing " + i);
+  	}
+  }
+  sendMessage(message){
+    this.socketService.sendMessage(message);
     this.message = '';
   }
 

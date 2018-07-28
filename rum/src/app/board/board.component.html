@@ -10,8 +10,23 @@
 	Not in a room!
 </div>
 
+
+<input type="text" [(ngModel)]="message" (keyup.enter)="sendMessage(message)" > <button (click)="sendMessage(message)"> Send </button>
+<br>
+<button (click)="sendMany(message)"> Send Many Messages </button>
+<br>
+<br>
 <h2>Messages</h2>
 <div *ngFor="let message of messages">
-	{{message.text}}
+	{{message}}
 </div>
-<input type="text" [(ngModel)]="message" > <button (click)="sendMessage()"> Send </button>
+<br>
+Sent Messages list: {{messages | json}}
+<br>
+<br>
+Session Messages list: {{socketService.previousSessionMessages | json}}
+<br>
+<br>
+url2: {{url2}}
+<br>
+url3: {{url3}}
