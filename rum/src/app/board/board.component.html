@@ -1,4 +1,4 @@
-<div *ngIf="inRoom">
+<!-- <div *ngIf="inRoom">
 	In a room!
 	<app-card #card1 single="blue" double1="red" double2="orange"></app-card>
 
@@ -8,25 +8,56 @@
 
 <div *ngIf="!inRoom">
 	Not in a room!
+</div> -->
+<div *ngIf="!usernameSet">
+	<input type="text" [(ngModel)]="username" (keyup.enter)="setUsername(username)" > <button (click)="setUsername(username)"> Set User Name </button>
 </div>
 
+<div *ngIf="usernameSet">
 
-<input type="text" [(ngModel)]="message" (keyup.enter)="sendMessage(message)" > <button (click)="sendMessage(message)"> Send </button>
-<br>
-<button (click)="sendMany(message)"> Send Many Messages </button>
-<br>
-<br>
-<h2>Messages</h2>
-<div *ngFor="let message of messages">
-	{{message}}
+	<h1>Welcome, {{username}}</h1>
+	<input type="text" [(ngModel)]="message" (keyup.enter)="sendMessage(message)" > <button (click)="sendMessage(message)"> Send </button>
+	<br>
+	<button (click)="sendMany(message)"> Send Many Messages </button>
+	<br>
+
+	<br>
+	<br>
+	<input type="text" [(ngModel)]="room_name" (keyup.enter)="createRoom(room_name)" > <button (click)="createRoom(room_name)"> CREATE ROOM </button>
+	<br>
+	<br>
+	<h2>Messages</h2>
+	<div *ngFor="let message of messages">
+		{{message}}
+	</div>
+	<br>
+	Sent Messages list: {{messages | json}}
+	<br>
+	<br>
+	Session Messages list: {{socketService.previousSessionMessages | json}}
+	<br>
+	<br>
+	url2: {{url2}}
+	<br>
+	url3: {{url3}}
+	<br>
+
+	<h4>Rooms</h4>
+	<ul>
+		<li *ngFor="let room of rooms">
+			<b>{{room.name}}</b>
+			<ul>
+				<li>Users: {{room.users | json}}</li>
+				<li>Owned by: {{room.owner}}</li>
+			</ul>
+			<button (click)="joinRoom(room.name)">JOIN ROOM</button>
+		</li>
+	</ul>
+	<h4>Users:</h4>
+	<ul>
+		<li *ngFor="let user of users">
+			{{user}}
+		</li>
+	</ul>
 </div>
-<br>
-Sent Messages list: {{messages | json}}
-<br>
-<br>
-Session Messages list: {{socketService.previousSessionMessages | json}}
-<br>
-<br>
-url2: {{url2}}
-<br>
-url3: {{url3}}
+
